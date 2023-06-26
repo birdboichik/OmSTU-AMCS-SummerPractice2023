@@ -3,6 +3,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrimeService", "PrimeService\PrimeService.csproj", "{139F8A46-AD99-463A-A086-15358AF111C9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrimeService.Tests", "PrimeService.Tests\PrimeService.Tests.csproj", "{0C02A771-32DB-4CFC-B0CC-A06D853A9F90}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -10,5 +14,15 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{139F8A46-AD99-463A-A086-15358AF111C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{139F8A46-AD99-463A-A086-15358AF111C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{139F8A46-AD99-463A-A086-15358AF111C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{139F8A46-AD99-463A-A086-15358AF111C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C02A771-32DB-4CFC-B0CC-A06D853A9F90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C02A771-32DB-4CFC-B0CC-A06D853A9F90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C02A771-32DB-4CFC-B0CC-A06D853A9F90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C02A771-32DB-4CFC-B0CC-A06D853A9F90}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
