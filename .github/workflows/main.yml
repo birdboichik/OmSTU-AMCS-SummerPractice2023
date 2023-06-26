@@ -1,0 +1,26 @@
+name: Square equation unittest and coverage
+
+on:
+  push:
+    branches: ["unittest"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: 7.0.x
+
+      - name: Restore dependencies
+        run: dotnet restore SquareEq/
+
+      - name: Build
+        run: dotnet build SquareEq/ --no-restore /p:ContinuousIntegrationBuild=true
+
+      - name: Unittest and coverage
+        run: dotnet test /p:CollectCoverage=true /p:ThresholdType=line /p:Threshold=100
