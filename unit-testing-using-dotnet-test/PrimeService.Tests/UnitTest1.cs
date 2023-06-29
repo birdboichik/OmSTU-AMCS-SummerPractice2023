@@ -1,10 +1,17 @@
-namespace PrimeService.Tests;
+using Xunit;
+using Prime.Services;
 
-public class UnitTest1
+namespace Prime.UnitTests.Services
 {
-    [Fact]
-    public void Test1()
+    public class PrimeService_IsPrimeShould
     {
+        [Fact]
+        public void IsPrime_InputIs1_ReturnFalse()
+        {
+            var primeService = new PrimeService();
+            bool result = primeService.IsPrime(1);
 
+            Assert.False(result, "1 should not be prime");
+        }
     }
 }
