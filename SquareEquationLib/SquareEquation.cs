@@ -1,34 +1,34 @@
-﻿namespace SquareEquationLib;
+﻿﻿﻿namespace SquareEquationLib;
 
 public class SquareEquation
 {
     public static double[] Solve(double a, double b, double c)
-    {
-        double[] ans = new double[2];
-        double eps = Math.Pow(10, -9);
-        if (Math.Abs(a) < eps)
-        {
+    {        
+        const double TOLERANCE = 0.00000001;
+
+        if (Math.Abs(a) < TOLERANCE)
             throw new System.ArgumentException();
-        }
-        if (double.IsNaN(a) || double.IsInfinity(a) || double.IsNaN(b) || double.IsInfinity(b) || double.IsNaN(c) || double.IsInfinity(c))
+
+        foreach (double x in new double[] {a, b, c})
         {
-            throw new System.ArgumentException();
+            if (double.IsNaN(x) || double.IsInfinity(x))
+                throw new System.ArgumentException();
         }
-        double d = Math.Pow(b, 2) - 4 * a * c;
-        if (d < 0 && !(Math.Abs(d) < eps))
+
+        double D = b*b - 4*a*c;        
+        if (Math.Sign(D) < 0 && !(Math.Abs(D) < TOLERANCE))
+            return new double[0];
+
+        double x1 = -(b + Math.Sign(b)*Math.Sqrt(D))/2;
+        if (b == 0)
         {
-            ans = new double[0];
+            x1 = -Math.Sqrt(D)/2;
         }
-        else if (d < eps)
-        {
-            ans = new double[1];
-            ans[0] = -(b + Math.Sign(b) * Math.Sqrt(d)) / 2;
-        }
-        else
-        {
-            ans[0] = -(b + Math.Sign(b) * Math.Sqrt(d)) / 2;
-            ans[1] = c / ans[0];
-        }
-        return ans;
+        double x2 = c/x1;
+
+        if (D < TOLERANCE)
+            return new double[] {x1};
+        
+        return new double[] {x1, x2};   
     }
 }
