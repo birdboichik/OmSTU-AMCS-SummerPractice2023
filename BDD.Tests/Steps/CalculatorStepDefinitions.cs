@@ -1,7 +1,8 @@
 namespace SquareEquationLib.BDDTests;
 using SquareEquationLib;
 using TechTalk.SpecFlow;
-
+using System;
+using Xunit;
 
 [Binding]
 public class StepDefinitions
@@ -13,7 +14,7 @@ public class StepDefinitions
     [When("вычисляются корни квадратного уравнения")]
     public void EvaluateEquationRoots()
     {
-        try
+        try 
         {
             _actualRoots = SquareEquation.Solve(
                 _coefficients[0],
@@ -23,14 +24,14 @@ public class StepDefinitions
         }
         catch (Exception e)
         {
-            _actualException = e;
+            _actualException =  e;
         }
     }
     [Given(@"Квадратное уравнение с коэффициентами \((.*), (.*), (.*)\)")]
-    public void GiveSqaureEquationCoefficients(string a, string b, string c)
+    public void GiveSqaureEquationCoefficients(string a, string b, string c) 
     {
-        string[] input = new string[] { a.Split(".")[^1], b.Split(".")[^1], c.Split(".")[^1] };
-
+        string[] input = new string[] {a.Split(".")[^1], b.Split(".")[^1], c.Split(".")[^1]};
+        
         for (int i = 0; i < 3; i++)
         {
             if (input[i] == "NegativeInfinity")
@@ -48,15 +49,15 @@ public class StepDefinitions
     {
         Assert.ThrowsAsync<ArgumentException>(() => throw _actualException);
     }
-
+    
     [Then(@"квадратное уравнение имеет один корень (.*) кратности два")]
     public void SquareEquationHasOneRoot(double x)
     {
-        double[] expectedRoots = new double[] { x };
-
+        double[] expectedRoots = new double[] {x};
+        
         if (_actualRoots.Length != 1)
         {
-            Assert.Fail("");
+            Assert.True(false, "Message");
         }
 
         for (int i = 0; i < expectedRoots.Length; i++)
@@ -68,14 +69,14 @@ public class StepDefinitions
     [Then(@"квадратное уравнение имеет два корня \((.*), (.*)\) кратности один")]
     public void SqaureEquationHasTwoRoots(double x1, double x2)
     {
-        double[] expectedRoots = new double[] { x1, x2 };
-
+        double[] expectedRoots = new double[] {x1, x2};
+        
         Array.Sort(expectedRoots);
         Array.Sort(_actualRoots);
 
         if (_actualRoots.Length != 2)
         {
-            Assert.Fail("");
+            Assert.True(false, "Message");
         }
 
         for (int i = 0; i < expectedRoots.Length; i++)
