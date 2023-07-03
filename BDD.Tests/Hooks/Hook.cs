@@ -6,6 +6,6 @@ namespace BDD.Tests.Hooks
     [Binding]
     public class Hooks
     {
-        
+
     }
 }

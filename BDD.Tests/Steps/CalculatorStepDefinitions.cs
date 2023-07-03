@@ -1,58 +1,92 @@
+namespace SquareEquationLib.BDDTests;
+using SquareEquationLib;
 using TechTalk.SpecFlow;
 
-namespace BDD.Tests.Steps
+
+[Binding]
+public class StepDefinitions
 {
-    [Binding]
-    public sealed class CalculatorStepDefinitions
+    private const double TOLERATE = 10e-7;
+    private double[] _coefficients = new double[3];
+    private double[] _actualRoots = new double[0];
+    private Exception _actualException = new Exception();
+    [When("вычисляются корни квадратного уравнения")]
+    public void EvaluateEquationRoots()
     {
-       
-       // For additional details on SpecFlow step definitions see https://go.specflow.org/doc-stepdef
-
-       private readonly ScenarioContext _scenarioContext;
-
-       public CalculatorStepDefinitions(ScenarioContext scenarioContext)
-       {
-           _scenarioContext = scenarioContext;
-       }
-
-       [Given("the first number is (.*)")]
-       public void GivenTheFirstNumberIs(int number)
-       {
-           //TODO: implement arrange (precondition) logic
-           // For storing and retrieving scenario-specific data see https://go.specflow.org/doc-sharingdata
-           // To use the multiline text or the table argument of the scenario,
-           // additional string/Table parameters can be defined on the step definition
-           // method. 
-
-           _scenarioContext.Pending();
-       }
-
-       [Given("the second number is (.*)")]
-       public void GivenTheSecondNumberIs(int number)
-       {
-           //TODO: implement arrange (precondition) logic
-           // For storing and retrieving scenario-specific data see https://go.specflow.org/doc-sharingdata
-           // To use the multiline text or the table argument of the scenario,
-           // additional string/Table parameters can be defined on the step definition
-           // method. 
-
-           _scenarioContext.Pending();
+        try
+        {
+            _actualRoots = SquareEquation.Solve(
+                _coefficients[0],
+                _coefficients[1],
+                _coefficients[2]
+            );
         }
-        
-       [When("the two numbers are added")]
-       public void WhenTheTwoNumbersAreAdded()
-       {
-           //TODO: implement act (action) logic
+        catch (Exception e)
+        {
+            _actualException = e;
+        }
+    }
+    [Given(@"Квадратное уравнение с коэффициентами \((.*), (.*), (.*)\)")]
+    public void GiveSqaureEquationCoefficients(string a, string b, string c)
+    {
+        string[] input = new string[] { a.Split(".")[^1], b.Split(".")[^1], c.Split(".")[^1] };
 
-           _scenarioContext.Pending();
-       }
+        for (int i = 0; i < 3; i++)
+        {
+            if (input[i] == "NegativeInfinity")
+                _coefficients[i] = double.NegativeInfinity;
+            else if (input[i] == "PositiveInfinity")
+                _coefficients[i] = double.PositiveInfinity;
+            else if (input[i] == "NaN")
+                _coefficients[i] = double.NaN;
+            else
+                _coefficients[i] = double.Parse(input[i]);
+        }
+    }
+    [Then("выбрасывается исключение ArgumentException")]
+    public void ThrowingArgumentException()
+    {
+        Assert.ThrowsAsync<ArgumentException>(() => throw _actualException);
+    }
 
-       [Then("the result should be (.*)")]
-       public void ThenTheResultShouldBe(int result)
-       {
-           //TODO: implement assert (verification) logic
+    [Then(@"квадратное уравнение имеет один корень (.*) кратности два")]
+    public void SquareEquationHasOneRoot(double x)
+    {
+        double[] expectedRoots = new double[] { x };
 
-           _scenarioContext.Pending();
-       }
+        if (_actualRoots.Length != 1)
+        {
+            Assert.Fail("");
+        }
+
+        for (int i = 0; i < expectedRoots.Length; i++)
+        {
+            Assert.Equal(_actualRoots[i], expectedRoots[i]);
+        }
+    }
+
+    [Then(@"квадратное уравнение имеет два корня \((.*), (.*)\) кратности один")]
+    public void SqaureEquationHasTwoRoots(double x1, double x2)
+    {
+        double[] expectedRoots = new double[] { x1, x2 };
+
+        Array.Sort(expectedRoots);
+        Array.Sort(_actualRoots);
+
+        if (_actualRoots.Length != 2)
+        {
+            Assert.Fail("");
+        }
+
+        for (int i = 0; i < expectedRoots.Length; i++)
+        {
+            Assert.Equal(_actualRoots[i], expectedRoots[i]);
+        }
+    }
+
+    [Then(@"множество корней квадратного уравнения пустое")]
+    public void SqaureEquationHasNoRoots()
+    {
+        Assert.Empty(_actualRoots);
     }
 }
