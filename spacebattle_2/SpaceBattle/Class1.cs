@@ -1,82 +1,32 @@
-﻿﻿namespace SpaceBattleLib;
-public class Spaceship
-{
-    public Engine Engine {get; set;}
-    public PositionInSpace Position {get; set;}
-    public Spaceship() 
-    {
-        this.Engine = new Engine();
-        this.Position = new PositionInSpace();
-    }
-    public void SillyCheck()
-    {
-        List<double> allParameters = this.Position.Position.ToList<double>();
-        allParameters.AddRange(this.Engine.UniformMotionSpeed);
-        allParameters.Add(this.Position.RotateAngle);
-        allParameters.Add(this.Engine.AngularVelocity);
-        if (allParameters.Any(x => double.IsNaN(x) || double.IsInfinity(x)))
-            throw new Exception();
-    }
-    public void UniformMotion()
-    {
-        SillyCheck();
-        double[] instantSpeed = this.Engine.UniformMotion();
-        for (int i = 0; i < 2; i++)
-        {
-            this.Position.Position[i] += instantSpeed[i];
-        }
-    }
-    public void Rotate() 
-    {
-        SillyCheck();
-        double angularVelocity = this.Engine.Rotate();
-        this.Position.RotateAngle += angularVelocity;
-        if (360 < this.Position.RotateAngle)
-        {
-            this.Position.RotateAngle -= 360;
-        }
-    }
-}
+﻿﻿﻿namespace spacebattle;
 
-public class PositionInSpace
+public class SpaceShip
 {
-    public double[] Position {get; set;}
-    public double RotateAngle {get; set;}
-    public PositionInSpace()
-    {
-        this.Position = new double[] {0, 0};
-        this.RotateAngle = 0;
-    }
-}
-
-public class Engine
-{
-    public double Fuel {get; set;}
-    public double FuelConsumption {get; set;}
-    public double[] UniformMotionSpeed {get; set;}
-    public double AngularVelocity {get; set;}
-    public Engine()
-    {
-        this.UniformMotionSpeed = new double[] {0, 0};
-        this.AngularVelocity = 0;
-        this.Fuel = 0;
-        this.FuelConsumption = 0;
-    }
-    public void TryMove()
-    {
-        if (this.Fuel < this.FuelConsumption)
+    public static double [] Move (bool isCanMove, bool isKnowSpeed,
+    bool isKnowPosition, double [] Speed, double [] Position){
+        if (!isCanMove || !isKnowSpeed || !isKnowPosition){
             throw new Exception();
-        else 
-            this.Fuel -= this.FuelConsumption;
+        }
+        double[] total = {Position[0] + Speed[0], Position[1] + Speed[1]};
+        return total;
     }
-    public double[] UniformMotion()
-    {
-        TryMove();
-        return this.UniformMotionSpeed;
+
+
+    public static double Fuel (double fuel, double change_fuel){
+        if (fuel < change_fuel){
+            throw new Exception();
+        }
+        double total = fuel - change_fuel;
+        return total;
     }
-    public double Rotate()
-    {
-        TryMove();
-        return this.AngularVelocity;
+
+
+    public static double Turn (double corner, double change_angle,
+     bool isKnowCorner, bool isKnowChangeAngle, bool isCanChangeAngle){
+        if (!isKnowCorner || !isKnowChangeAngle || !isCanChangeAngle){
+            throw new Exception();
+        }
+        double total = corner + change_angle;
+        return total;
     }
 }
