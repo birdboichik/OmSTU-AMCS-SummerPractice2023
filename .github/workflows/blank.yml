@@ -1,0 +1,32 @@
+name: space battle
+
+
+on:
+  push:
+    branches: ["spacebattle"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: 7.0.x
+
+      - name: Restore dependencies
+        run: dotnet restore ./SpaceBattleProject/SpaceBattleLib
+
+      - name: Build
+        run: dotnet build ./SpaceBattleProject/SpaceBattleLib --no-restore /p:ContinuousIntegrationBuild=true
+
+      - name: Test
+        run: cd SpaceBattleProject && dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura
+
+      - name: Codecov
+        uses: codecov/codecov-action@v3
+        with: 
+          token: 82e946ce-cc82-4d39-8c53-19cd842ee593
