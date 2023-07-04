@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<coverage line-rate="1" branch-rate="1" version="1.9" timestamp="1688476071" lines-covered="26" lines-valid="26" branches-covered="10" branches-valid="10">
+  <sources>
+    <source>/</source>
+  </sources>
+  <packages>
+    <package name="spacebattle" line-rate="1" branch-rate="1" complexity="13">
+      <classes>
+        <class name="SpaceBattle.SpaceShip" filename="home/ubuntu/OmSTU-AMCS-SummerPractice2023/spacebattleproj/spacebattle/spacebattle.cs" line-rate="1" branch-rate="1" complexity="13">
+          <methods>
+            <method name="SetCoordinates" signature="(System.Double[])" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="11" hits="4" branch="False" />
+                <line number="12" hits="4" branch="False" />
+                <line number="13" hits="4" branch="False" />
+              </lines>
+            </method>
+            <method name="SetSpeed" signature="(System.Double[])" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="15" hits="4" branch="False" />
+                <line number="16" hits="4" branch="False" />
+                <line number="17" hits="4" branch="False" />
+              </lines>
+            </method>
+            <method name="CheckCoordinates" signature="(System.Double[])" line-rate="1" branch-rate="1" complexity="6">
+              <lines>
+                <line number="19" hits="7" branch="False" />
+                <line number="20" hits="40" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="49" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="21" hits="11" branch="False" />
+                <line number="22" hits="11" branch="True" condition-coverage="100% (4/4)">
+                  <conditions>
+                    <condition number="19" type="jump" coverage="100%" />
+                    <condition number="32" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="23" hits="3" branch="False" />
+                <line number="24" hits="3" branch="False" />
+                <line number="26" hits="8" branch="False" />
+                <line number="27" hits="4" branch="False" />
+                <line number="28" hits="7" branch="False" />
+              </lines>
+            </method>
+            <method name="ChangeCoordinates" signature="()" line-rate="1" branch-rate="1" complexity="4">
+              <lines>
+                <line number="30" hits="4" branch="False" />
+                <line number="31" hits="4" branch="True" condition-coverage="100% (4/4)">
+                  <conditions>
+                    <condition number="13" type="jump" coverage="100%" />
+                    <condition number="32" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="32" hits="1" branch="False" />
+                <line number="33" hits="1" branch="False" />
+                <line number="34" hits="1" branch="False" />
+                <line number="35" hits="1" branch="False" />
+                <line number="38" hits="3" branch="False" />
+                <line number="39" hits="3" branch="False" />
+                <line number="41" hits="1" branch="False" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="8" hits="4" branch="False" />
+                <line number="9" hits="4" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="11" hits="4" branch="False" />
+            <line number="12" hits="4" branch="False" />
+            <line number="13" hits="4" branch="False" />
+            <line number="15" hits="4" branch="False" />
+            <line number="16" hits="4" branch="False" />
+            <line number="17" hits="4" branch="False" />
+            <line number="19" hits="7" branch="False" />
+            <line number="20" hits="40" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="49" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="21" hits="11" branch="False" />
+            <line number="22" hits="11" branch="True" condition-coverage="100% (4/4)">
+              <conditions>
+                <condition number="19" type="jump" coverage="100%" />
+                <condition number="32" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="23" hits="3" branch="False" />
+            <line number="24" hits="3" branch="False" />
+            <line number="26" hits="8" branch="False" />
+            <line number="27" hits="4" branch="False" />
+            <line number="28" hits="7" branch="False" />
+            <line number="30" hits="4" branch="False" />
+            <line number="31" hits="4" branch="True" condition-coverage="100% (4/4)">
+              <conditions>
+                <condition number="13" type="jump" coverage="100%" />
+                <condition number="32" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="32" hits="1" branch="False" />
+            <line number="33" hits="1" branch="False" />
+            <line number="34" hits="1" branch="False" />
+            <line number="35" hits="1" branch="False" />
+            <line number="38" hits="3" branch="False" />
+            <line number="39" hits="3" branch="False" />
+            <line number="41" hits="1" branch="False" />
+            <line number="8" hits="4" branch="False" />
+            <line number="9" hits="4" branch="False" />
+          </lines>
+        </class>
+      </classes>
+    </package>
+  </packages>
+</coverage>
