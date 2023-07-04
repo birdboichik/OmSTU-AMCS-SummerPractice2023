@@ -17,4 +17,4 @@ jobs:
           dotnet-version: 7.0.x
 
       - name: Check code coverage
-        run: cd spacebattleproj/spacebattle && dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura
+        run: cd spacebattleproj && dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura
