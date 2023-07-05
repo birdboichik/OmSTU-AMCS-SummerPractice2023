@@ -1,0 +1,26 @@
+name: spacebattle test
+
+on:
+  push:
+    branches: ["spacebattle_v2"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup .NET7
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: 7.0.x
+
+      - name: Restore dependencies
+        run: dotnet restore spacebattle_2/SpaceBattle
+
+      - name: Test Build
+        run: dotnet build spacebattle_2/SpaceBattle --no-restore /p:ContinuousIntegrationBuild=true
+
+      - name: BDD test
+        run: cd spacebattle_2/SpaceBattleBDD && dotnet test /p:CollectCoverage=true /p:CoverletOutput=TestResults/ /p:CoverletOutputFormat=lcov
